@@ -3,6 +3,7 @@
 This is where I save the web pages that I developed as development tools or for experimentations.
 
 This project contains the following pages:
+
 1. Home page with links to the other pages + a widget indicating Tomcat status (with applications state) + a widget indicating ElasticSearch status (with stats on indexes and plugins)
 ..* Unfortunately, this page was lost before due to a bad manipulation :(
 1. ESSM monitoring app: used to demonstrate the "admin status" SelfService REST API. Used during a sprint review
