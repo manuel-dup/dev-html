@@ -1,10 +1,52 @@
 // ------------ for speech-recognition.html ------------
 
 var SpeechRecognition = typeof SpeechRecognition !== "undefined" ? SpeechRecognition : typeof webkitSpeechRecognition !== "undefined" ? webkitSpeechRecognition : null;
-$('#start,#stop,#read').attr('disabled', 'true');
+$('#start,#stop').attr('disabled', 'true');
+
+var voices = {};
+var noVoices = function() {
+    $('#no-voices').show();
+    $('#read').attr('disabled', 'true');
+}
+
+var speak = function(text, lang) {
+    var t = text.trim();
+    if (t.length > 0) {
+        var utterance = new SpeechSynthesisUtterance(t);
+        utterance.lang = lang;
+        synth.speak(utterance);
+    }
+}
+
+var synth = window.speechSynthesis;
+
+if (typeof synth !== "undefined") {
+    synth.cancel();
+}
+
+synth.onvoiceschanged = function() {
+    var synthVoices = synth.getVoices();
+    if (synthVoices.length > 0) {
+        for (var v of synthVoices) {
+            voices[v.lang] = v;
+        }
+        $('#no-voices').hide();
+        $('#read').removeAttr('disabled');
+    } else {
+        noVoices();
+    }
+}
+
+if (synth.getVoices().length <= 0) {
+    noVoices();
+}
 
 if (SpeechRecognition === null) {
     $('#not-supported').show();
+    $('#output').text("Exemple pour tester la synthèse vocale. Est-ce que ça marche ?");
+    $('#read').click(function() {
+        speak($('#output').text(), 'fr-FR');
+    });
 
 } else {
     var recognition = new SpeechRecognition();
@@ -17,6 +59,7 @@ if (SpeechRecognition === null) {
         recognition.start();
         $('#start').attr('disabled', 'true');
         $('#stop').removeAttr('disabled');
+        $('#output').removeClass("final");
     });
 
     $('#stop').click(function() {
@@ -24,7 +67,7 @@ if (SpeechRecognition === null) {
     });
 
     $('#read').click(function() {
-
+        speak($('#output').text(), recognition.lang);
     });
 
     var selectLang = function(lang, label) {
