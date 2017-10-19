@@ -1,0 +1,451 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "v1",
+    "title" : "Snowball Marker"
+  },
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "Api Specifications"
+  }, {
+    "name" : "Configuration reader"
+  }, {
+    "name" : "Health Check"
+  }, {
+    "name" : "Marker"
+  }, {
+    "name" : "Readiness check"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/health" : {
+      "get" : {
+        "tags" : [ "Health Check" ],
+        "summary" : "Return the health status of the service",
+        "description" : "",
+        "operationId" : "healthStatus",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns the list successfully.",
+            "schema" : {
+              "$ref" : "#/definitions/HealthStatus"
+            }
+          },
+          "503" : {
+            "description" : "The service is unhealthy",
+            "schema" : {
+              "$ref" : "#/definitions/HealthStatus"
+            }
+          }
+        }
+      }
+    },
+    "/marker/add-annotations" : {
+      "post" : {
+        "tags" : [ "Marker" ],
+        "summary" : "Retrieve annotations for a given message",
+        "description" : "",
+        "operationId" : "analyze",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "the Message to analyze",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Message"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Message"
+            }
+          },
+          "400" : {
+            "description" : "The request is not valid.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          },
+          "500" : {
+            "description" : "An internal error occurred.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          }
+        }
+      }
+    },
+    "/marker/add-annotations/{modules}" : {
+      "post" : {
+        "tags" : [ "Marker" ],
+        "summary" : "Retrieve annotations for a given message using the specified modules.",
+        "description" : "",
+        "operationId" : "analyze",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "modules",
+          "in" : "path",
+          "description" : "The modules to use",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "csv"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "the Message to analyze",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Message"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Message"
+            }
+          },
+          "400" : {
+            "description" : "The request is not valid.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          },
+          "500" : {
+            "description" : "An internal error occurred.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          }
+        }
+      }
+    },
+    "/marker/analyze-file/{lang}" : {
+      "post" : {
+        "tags" : [ "Marker" ],
+        "summary" : "Import a file and analyze it",
+        "description" : "",
+        "operationId" : "importFile",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/csv" ],
+        "parameters" : [ {
+          "name" : "lang",
+          "in" : "path",
+          "description" : "language of the content",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "file",
+          "in" : "formData",
+          "description" : "CSV file to analyze.",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/StreamingOutput"
+            }
+          },
+          "400" : {
+            "description" : "The request is not valid.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          },
+          "500" : {
+            "description" : "An internal error occurred.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          }
+        }
+      }
+    },
+    "/marker/analyze-file/{lang}/{modules}" : {
+      "post" : {
+        "tags" : [ "Marker" ],
+        "summary" : "Import a file and analyze it",
+        "description" : "",
+        "operationId" : "importFile",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/csv" ],
+        "parameters" : [ {
+          "name" : "modules",
+          "in" : "path",
+          "description" : "The modules to use",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "csv"
+        }, {
+          "name" : "lang",
+          "in" : "path",
+          "description" : "language of the content",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "file",
+          "in" : "formData",
+          "description" : "CSV file to analyze.",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/StreamingOutput"
+            }
+          },
+          "400" : {
+            "description" : "The request is not valid.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          },
+          "500" : {
+            "description" : "An internal error occurred.",
+            "schema" : {
+              "$ref" : "#/definitions/MarkerError"
+            }
+          }
+        }
+      }
+    },
+    "/marker/specs" : {
+      "get" : {
+        "tags" : [ "Api Specifications" ],
+        "summary" : "Retrieves the specifications for this API",
+        "description" : "Specification format is OpenAPI Specification, see https://github.com/OAI/OpenAPI-Specification",
+        "operationId" : "getSpecifications",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/properties" : {
+      "get" : {
+        "tags" : [ "Configuration reader" ],
+        "summary" : "Get list of configuration keys",
+        "description" : "",
+        "operationId" : "getConfigurationProperties",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/PropertiesModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/readiness" : {
+      "get" : {
+        "tags" : [ "Readiness check" ],
+        "summary" : "Checks that the service is up and running",
+        "description" : "",
+        "operationId" : "readinessCheck",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Annotation" : {
+      "type" : "object",
+      "required" : [ "value" ],
+      "properties" : {
+        "value" : {
+          "type" : "string",
+          "description" : "The content of the annotation"
+        }
+      }
+    },
+    "AnnotationSet" : {
+      "type" : "object",
+      "properties" : {
+        "main" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/Annotation"
+          }
+        },
+        "extra" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/Annotation"
+          }
+        },
+        "intentions" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/Annotation"
+          }
+        }
+      }
+    },
+    "Choice" : {
+      "type" : "object",
+      "required" : [ "label", "value" ],
+      "properties" : {
+        "label" : {
+          "type" : "string",
+          "description" : "Displayed label."
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "Value."
+        }
+      },
+      "description" : "A choice associated with a message"
+    },
+    "HealthStatus" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "enum" : [ "healthy", "unhealthy", "dead" ]
+        },
+        "details" : {
+          "type" : "string"
+        },
+        "statusByComponents" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string",
+            "enum" : [ "connected", "disconnected", "failed" ]
+          }
+        }
+      }
+    },
+    "MarkerError" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string",
+          "description" : "the detailed message describing the error"
+        },
+        "errorId" : {
+          "type" : "string",
+          "description" : "the unique identifier of the error",
+          "enum" : [ "NO_MESSAGE", "NO_MESSAGE_LANGUAGE", "INVALID_LINGUISTIC_MODULE", "INVALID_UPLOAD_REQUEST", "NO_LANGUAGE", "LANGUAGE_NOT_ENABLED", "NO_UPLOADED_FILE" ]
+        },
+        "snowballMessage" : {
+          "$ref" : "#/definitions/Message"
+        }
+      },
+      "description" : "Details provided when an error occurs"
+    },
+    "Message" : {
+      "type" : "object",
+      "required" : [ "id", "lang", "text" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "ID.",
+          "readOnly" : true
+        },
+        "metadata" : {
+          "type" : "object",
+          "description" : "Metadata.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "lang" : {
+          "type" : "string",
+          "description" : "The lang of the message."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The text of the message."
+        },
+        "annotations" : {
+          "description" : "The list of annotations.",
+          "$ref" : "#/definitions/AnnotationSet"
+        },
+        "answerReference" : {
+          "type" : "string",
+          "description" : "A unique reference that identify the answer (when message is an answer)."
+        },
+        "choices" : {
+          "type" : "array",
+          "description" : "A list of associated choices.",
+          "items" : {
+            "$ref" : "#/definitions/Choice"
+          }
+        }
+      },
+      "description" : "One or more sentences submitted atomically. This is a timestamped verbatim associated to a source (customer, bot, agent, etc...)"
+    },
+    "PropertiesModel" : {
+      "type" : "object",
+      "properties" : {
+        "propertySet" : {
+          "type" : "string",
+          "description" : "The name of the property list"
+        },
+        "properties" : {
+          "type" : "array",
+          "description" : "The property list",
+          "items" : {
+            "$ref" : "#/definitions/PropertyDescription"
+          }
+        }
+      },
+      "description" : "A list of properties"
+    },
+    "PropertyDescription" : {
+      "type" : "object",
+      "required" : [ "key" ],
+      "properties" : {
+        "defaultValue" : {
+          "type" : "string",
+          "description" : "The default value"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The description of the configuration key"
+        },
+        "key" : {
+          "type" : "string",
+          "description" : "The name of the configuration key"
+        }
+      },
+      "description" : "A configuration property"
+    },
+    "StreamingOutput" : {
+      "type" : "object"
+    }
+  }
+}

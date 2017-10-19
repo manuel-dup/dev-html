@@ -1,0 +1,113 @@
+.swagger-section .swagger-ui-wrap a {
+  color: #316f92;
+}
+
+.swagger-section .swagger-ui-wrap .footer {
+  margin: 20px 0;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation div.heading {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.swagger-section #header {
+  background-color: rgb(0,156,179);
+  padding: 0px;
+  position: fixed;
+  width: 100%;
+  height: 58px;
+}
+
+.swagger-section #header a#logo {
+  background: transparent url(../images/logo-eptica-header.png) no-repeat left center/130px auto;
+  padding: 14px 0 13px 150px;
+}
+
+.swagger-section #header form#api_selector .input a#explore {
+  color: #393939;
+  border-color: #316f92;
+  border-style: solid;
+  border-width: 1px 1px 2px;
+  background: #e8e8e8 none repeat scroll 0 0;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -o-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -khtml-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.swagger-section #header form#api_selector .input a#explore:hover {
+  background-color: #fbfbfb;
+}
+
+
+/* added MDU 2016-12-20 */
+.swagger-section #back {
+    float: left;
+    padding: 19px 10px;
+}
+
+.swagger-section #header .swagger-ui-wrap {
+    padding: 17px;
+}
+
+.swagger-section #back:hover {
+    background-color: rgb(0,126,149);
+}
+
+.swagger-section #back a {
+    font-family: "Droid Sans",sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+
+.swagger-section #knownUrls {
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    width: 406px;
+    margin-top: -4px;
+}
+
+.swagger-section #knownUrls table {
+    width: 100%;
+}
+
+.swagger-section #knownUrls table td:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.swagger-section #knownUrls th {
+    padding: 3px;
+    font-size: .9em;
+    vertical-align: top;
+    line-height: 1.3em;
+    font-weight: bold;
+    color: #777;
+    background-color: #ddd;
+    border-bottom: 1px solid #ccc;
+}
+
+.swagger-section #knownUrls td {
+    padding-left: 12px;
+}
+
+.swagger-section #spacer {
+    padding-top: 60px;
+}
+
+.swagger-section #api_selector {
+    display: inline-block;
+    float: none;
+    margin-left: 10px;
+}
+
+.swagger-section #auth_container {
+    display: none;
+}

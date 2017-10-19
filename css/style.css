@@ -1,0 +1,354 @@
+body {
+    /*margin: 0 5px;*/
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+a[target="_blank"]::after {
+    font-family:'Glyphicons Halflings';
+    font-size: 8pt;
+    content: " \e164";
+    margin-left: -6px;
+}
+
+.label {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.3);
+    padding: 0.3em 0.6em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 1px 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.page-title {
+    /* Shadows are visible under slightly transparent text color */
+    color: rgba(51, 122, 183, 0.8);
+    font-weight: bold;
+    text-shadow: 1px 2px 0 #fff, 0 0 0 #000;
+    padding-bottom: 20px;
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Don't show shadows when selecting text */
+::-moz-selection { background: #337ab7; color: #fff; text-shadow: 1px 1px 1px #000; }
+::selection { background: #337ab7; color: #fff; text-shadow: 1px 1px 1px #000; }
+
+.app-link {
+    padding: 5px 0 5px 40px;
+}
+
+.eptica-links {
+    background: transparent url("/img/epticalogo.png") no-repeat scroll left center / 28px auto;
+    padding: 5px 0;
+}
+
+.links .app-link {
+    display: inline;
+}
+
+#tomcat-link {
+    background: transparent url("/img/tomcat.png") no-repeat scroll left center;
+    background-size: 40px;
+    padding-top: 5px;
+}
+
+#rb-link {
+    background: transparent url("/img/rb-logo.png") no-repeat left center;
+    background-size: 30px;
+}
+
+#elsrch-head-link {
+    background: transparent url("/elsrch/head/_site/base/favicon.png") no-repeat 5px center;
+    background-size: 20px;
+    padding-left: 35px;
+}
+
+#elsrch-kopf-link {
+    background: transparent url("/elsrch/kopf/favicon.ico") no-repeat 15px center;
+    background-size: 20px;
+    padding-left: 45px;
+}
+
+#elsrch-hq-link {
+    padding-left: 20px;
+}
+
+#elsrch-hq-link::before {
+    content: "\f0e4";
+    font-family: FontAwesome;
+    font-weight: 400;
+    font-size: 25px;
+    font-style: normal;
+    color: grey;
+    padding-right: 5px;
+}
+
+#services-status {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 380px;
+}
+
+#tomcat-status-lastupdate,
+#elsrch-status-status {
+    float: right;
+    font-size: 14px;
+    margin-top: 2px;
+    clear: both;
+}
+
+.elsrch-status-full-line {
+    font-weight: bold;
+}
+
+.elsrch-status-full-line .label {
+    display: inline-block;
+    font-size: 95%;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.popover-content .table {
+    margin-bottom: 0;
+}
+
+.popover-content > .table td {
+    border: none;
+}
+
+.btn-down, .btn-down:hover, .btn-down:focus {
+    background-color: #aaa;
+    color: #fff;
+}
+
+#elsrch-status-status {
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 1px 0 1px rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-width: 1px;
+}
+
+#elsrch-indices tr :nth-child(2),
+#elsrch-indices tr :nth-child(3) {
+    text-align: right;
+}
+
+.elsrch-components .panel-heading {
+    padding: 10px;
+}
+
+.elsrch-components .panel-title {
+    font-size: 15px;
+}
+
+.status-refresh {
+    margin-top: -5px;
+    margin-left: -10px;
+}
+
+#tomcat-apps {
+    font-size: 16px;
+}
+
+#tomcat-apps tr.success td span.glyphicon::before,
+#essm-monitor-confs tr.success td span.glyphicon::before {
+    content: "";
+    color: green;
+}
+
+#tomcat-apps tr.danger td span.glyphicon::before,
+#essm-monitor-confs tr.danger td span.glyphicon::before {
+    content: "";
+    color: red;
+}
+
+#essm-monitor-confs tr.active td span.glyphicon::before {
+    content: "\e082";
+    color: grey;
+}
+
+#tomcat-apps tr.warning td span.glyphicon::before {
+    content: "";
+    color: orange;
+}
+
+.left-part, .right-part {
+    width: 50%;
+}
+
+.right-part {
+    float: right;
+}
+
+.left-part {
+    clear: both;
+    float: left;
+}
+
+blockquote {
+    border-left: 5px solid #ddd;
+    display: inline-block;
+    width: 100%;
+}
+
+.part-title {
+    font-weight: bold;
+    margin: -10px 0 10px -10px;
+    font-size: 17.5px;
+}
+
+textarea#data {
+    font-family: monospace;
+}
+
+#send {
+    float: right;
+    margin: 5px 0;
+}
+
+#apill-response > pre {
+    height: 783px;
+    white-space: pre-wrap;
+}
+
+#apillclient-content {
+    height: calc(100vh - 77px);
+}
+
+#apillclient-content .panel {
+    margin-bottom: 5px;
+    height: 100%;
+}
+
+#apillclient-content .panel-body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.apill-response-loading {
+    float: right;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+.fill-form-group {
+    height: calc(100% - 150px);
+}
+
+#left-panel .fill-form-group,
+#apill-response {
+    height: 100%;
+}
+
+#apillclient-content .CodeMirror {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: calc(100% - 26px);
+}
+
+.CodeMirror-activeline-background {
+    background-color: #dae4ff;
+}
+
+#apillclient-content .CodeMirror-code > div:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+#apillclient-content .CodeMirror-code > div:nth-child(odd) {
+    background-color: #fdfdfd;
+}
+
+#error {
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+}
+
+#chat-urlparams {
+    white-space: normal;
+}
+
+#header-result {
+    margin-top: 5px;
+}
+
+#html-part, #text-part {
+    font-family: monospace;
+}
+
+#essm-monitor .input-group-addon {
+    font-weight: bold;
+}
+
+
+#essm-monitor-controls, #essm-status-loading {
+    float: right;
+}
+
+@media (max-width: 620px) {
+    #essm-monitor-controls, #essm-status-loading {
+        float: inherit;
+    }
+}
+#essm-status-loading {
+    margin-right: 5px;
+    margin-top: 7px;
+    display: block;
+}
+
+#essm-monitor .CodeMirror {
+    height: auto;
+}
+
+#essm-monitor #date {
+    color: #777;
+}
+
+#essm-monitor button {
+    outline: unset;
+}
+
+#essm-status-status {
+    font-size: 14px;
+    margin-top: 2px;
+    vertical-align: baseline;
+    font-weight: bold;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-width: 1px;
+}
+
+#monitor-essm-status.play span::before {
+    content: "\e072";
+}
+
+#monitor-essm-status.pause span::before {
+    content: "\e073";
+}
+
+#essm-monitor-confs {
+    margin-top: 20px;
+    width: 75%;
+}
+
+#essm-monitor-confs td {
+    border: 1px solid #ccc;
+}
+
+.special-warning {
+    display: inline-block;
+    margin: 4px 15px 0px 15px;
+    padding: 10px 15px;
+}

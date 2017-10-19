@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <title>Eptica REST API Explorer</title>
+        <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+        <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+        <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+        <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+        <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+        <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
+        <link href='css/eptica-custom.css' rel='stylesheet' type='text/css'/>
+
+        <script src='lib/object-assign-pollyfill.js' type='text/javascript'></script>
+        <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+        <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
+        <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
+        <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+        <script src='lib/handlebars-4.0.5.js' type='text/javascript'></script>
+        <script src='lib/lodash.min.js' type='text/javascript'></script>
+        <script src='lib/backbone-min.js' type='text/javascript'></script>
+        <script src='swagger-ui.js' type='text/javascript'></script>
+        <script src='lib/highlight.9.1.0.pack.js' type='text/javascript'></script>
+        <script src='lib/highlight.9.1.0.pack_extended.js' type='text/javascript'></script>
+        <script src='lib/jsoneditor.min.js' type='text/javascript'></script>
+        <script src='lib/marked.js' type='text/javascript'></script>
+        <script src='lib/swagger-oauth.js' type='text/javascript'></script>
+
+        <!-- Some basic translations -->
+        <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
+        <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
+        <!-- <script src='lang/en.js' type='text/javascript'></script> -->
+
+        <script type="text/javascript">
+            $(function () {
+                var url = window.location.search.match(/url=([^&]+)/);
+                if (url && url.length > 1) {
+                    url = decodeURIComponent(url[1]);
+                } else {
+                    url = null;
+                }
+
+                hljs.configure({
+                    highlightSizeThreshold: 5000
+                });
+
+              // Pre load translate...
+                if(window.SwaggerTranslator) {
+                    window.SwaggerTranslator.translate();
+                }
+
+                var methodOrders={'get':0, 'post':1, 'put':2, 'delete':3, 'patch':4};
+
+                window.swaggerUi = new SwaggerUi({
+                    url: url,
+                    dom_id: "swagger-ui-container",
+                    validatorUrl: null,
+                    supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                    onComplete: function(swaggerApi, swaggerUi){
+                        if (typeof initOAuth == "function") {
+                            initOAuth({
+                                clientId: "your-client-id",
+                                clientSecret: "your-client-secret-if-required",
+                                realm: "your-realms",
+                                appName: "your-app-name",
+                                scopeSeparator: " ",
+                                additionalQueryStringParams: {}
+                            });
+                        }
+
+                        if (window.SwaggerTranslator) {
+                            window.SwaggerTranslator.translate();
+                        }
+                    },
+                    onFailure: function(data) {
+                        log("Unable to Load SwaggerUI");
+                    },
+                    docExpansion: "none",
+                    jsonEditor: false,
+                    defaultModelRendering: 'schema',
+                    showRequestHeaders: true,
+                    showOperationIds: true,
+                    apisSorter: "alpha",
+                    operationsSorter: function(a, b) {
+                        aMethodOrder = methodOrders[a.method];
+                        bMethodOrder = methodOrders[b.method];
+                        return a.path > b.path && 1 || a.path < b.path && -1 || aMethodOrder - bMethodOrder;
+                    }
+                });
+
+                if (url !== null) {
+                    window.swaggerUi.load();
+                }
+
+                function log() {
+                    if ('console' in window) {
+                        console.log.apply(console, arguments);
+                    }
+                }
+            });
+        </script>
+    </head>
+
+    <body class="swagger-section">
+        <div id='header'>
+            <div id="back"><a href="/">&lt; Back</a></div>
+            <div class="swagger-ui-wrap">
+                <a id="logo">API Explorer</a>
+                <form id='api_selector'>
+                    <div class='input'>
+                        <input placeholder="http://<host>/api/specs" id="input_baseUrl" name="baseUrl" type="text"/>
+                    </div>
+                    <div id='auth_container'></div>
+                    <div class='input'>
+                        <a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a>
+                    </div>
+                    <div id="knownUrls">
+                        <table>
+                            <thead><tr><th>Known APIs</th></tr></thead>
+                            <tbody>
+                                <tr><td>http://localhost:28000/api/sledge/specs/</td></tr>
+                                <tr><td>http://localhost:28001/api/iceberg/specs/</td></tr>
+                                <tr><td>http://localhost:28002/api/marker/specs/</td></tr>
+                                <tr><td>http://localhost:28003/api/sherpa/specs/</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="spacer"></div>
+        <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
+        <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+
+        <script>
+            (function() {
+                $('#knownUrls tbody tr').click(function() {
+                    $('#input_baseUrl').val($(this).text());
+                    window.swaggerUi.options.url = $('#input_baseUrl').val();
+                    window.swaggerUi.load();
+                    $('#knownUrls').hide();
+                });
+
+                $('#input_baseUrl').focus(function() {
+                    $('#knownUrls').show();
+                }).blur(function() {
+                    setTimeout(function() {$('#knownUrls').hide();}, 100);
+                }).keyup(function(event) {
+                    // if a key is pressed
+                    $('#knownUrls').hide();
+                });
+
+                $('#knownUrls').hide();
+            })();
+        </script>
+    </body>
+</html>

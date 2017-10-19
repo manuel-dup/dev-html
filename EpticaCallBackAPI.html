@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" href="/favicon.ico" />
+        <title>Eptica API LL Form @EPT-F34</title>
+
+        <link rel="stylesheet" type="text/css" href="/js/select2/select2.css" />
+        <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+
+        <link href="/js/code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+        <link href="/js/codemirror/codemirror.css" type="text/css" rel="stylesheet" />
+        <link href="/js/codemirror/addon/fold/foldgutter.css" type="text/css" rel="stylesheet" />
+        <link href="/js/codemirror/addon/dialog/dialog.css" type="text/css" rel="stylesheet" />
+        <link href="/js/codemirror/addon/scroll/simplescrollbars.css" type="text/css" rel="stylesheet" />
+        <link href="/js/codemirror/addon/search/matchesonscrollbar.css" type="text/css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/index.html">EPT-F34</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="/index.html">Home</a></li>
+                <li class="dropdown active">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eptica API LL app <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/chat.html">Eptica Chat client page</a></li>
+                    <li><a href="/testELS">ELS test app</a></li>
+                    <li><a href="/essm-monitor.html">ESSM monitoring app</a></li>
+                    <li><a href="/experimentations.html">Experimentations</a></li>
+                    <li><a href="/swagger">Swagger UI</a></li>
+                    <li><a href="/speech-recognition.html">Web Speech API experimentations</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="http://ept-f34.lan.eptica.com:8080/esInt" target="_blank">ES</a></li>
+                    <li><a href="http://ept-f34.lan.eptica.com:8080/essm" target="_blank">ESSM</a></li>
+                    <li><a href="http://ept-f34.lan.eptica.com:8080/manager/html" target="_blank">Tomcat Manager</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+                <div class="alert alert-info special-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" id="close-error" title="Close" aria-hidden="true"></span>
+                    <span style="font-weight:bold;">Info:</span>
+                    <span>Use me in a private browsing window or another browser, or I will invalidate all your existing sessions in ES UI</span>
+                </div>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+
+<!--        <h2 class="page-title">EPT-F34: Eptica API LL Form</h2> -->
+        <div class="container-fluid">
+            <div id="apillclient-content">
+                <div class="panel panel-default col-sm-6">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="url">URL:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="url" value="http://localhost/esInt">
+                                <span class="input-group-addon" id="basic-addon2">/dispatch/api</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div style="display: inline-block;">
+                                <label for="user">Username:</label>
+                                <input type="text" class="form-control" id="user" value="admin">
+                            </div>
+                            <div style="display: inline-block;">
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" id="pwd" value="admin">
+                            </div>
+                            <button id="send" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="or press [Ctrl-Enter]">
+                                Send to ES API LL
+                            </button>
+                        </div>
+
+                        <div class="form-group fill-form-group">
+                            <label for="data">XML request:</label>
+                            <textarea spellcheck="false" class="form-control" id="data" name="data" rows="30" cols="104">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;QueryRequest&gt;
+  &lt;request&gt;
+    &lt;ticket_min&gt;40259&lt;/ticket_min&gt;
+    &lt;ticket_max&gt;40259&lt;/ticket_max&gt;
+  &lt;/request&gt;
+  &lt;options&gt;
+    &lt;max-results&gt;10&lt;/max-results&gt;
+    &lt;sortBy name=&quot;requestid&quot;&gt;false&lt;/sortBy&gt;
+    &lt;data&gt;
+      &lt;request inverted=&quot;true&quot;&gt;
+        &lt;fields/&gt;
+        &lt;requestHistory&gt;none&lt;/requestHistory&gt;
+        &lt;webboard_data&gt;
+          &lt;form_name&gt;false&lt;/form_name&gt;
+          &lt;referer_url&gt;false&lt;/referer_url&gt;
+        &lt;/webboard_data&gt;
+        &lt;email_data&gt;
+          &lt;subject&gt;false&lt;/subject&gt;
+          &lt;mailbox&gt;false&lt;/mailbox&gt;
+        &lt;/email_data&gt;
+      &lt;/request&gt;
+    &lt;/data&gt;
+  &lt;/options&gt;
+&lt;/QueryRequest&gt;
+    </textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default col-sm-6" id="left-panel">
+                    <div class="panel-body">
+                        <div class="alert alert-danger" id="error" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" id="close-error" title="Close" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            <span id="apill-error"></span>
+                        </div>
+                        <div class="form-group fill-form-group">
+                            <div class="apill-response-loading"><span class="glyphicon glyphicon-refresh"></span> Loading...</div>
+                            <label for="apill-response">Response:</label>
+                            <div id="apill-response"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+        <script src="/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/js/codemirror/codemirror.js" type="text/javascript"></script>
+        <script src="/js/codemirror/mode/xml/xml.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/fold/foldcode.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/fold/foldgutter.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/fold/xml-fold.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/edit/matchtags.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/edit/closetag.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/selection/active-line.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/search/search.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/search/searchcursor.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/dialog/dialog.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/scroll/simplescrollbars.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/scroll/annotatescrollbar.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/search/matchesonscrollbar.js" type="text/javascript"></script>
+
+        <script src="/js/script.js" type="text/javascript"></script>
+
+        <script>initEpticaCallBackAPI()</script>
+    </body>
+</html>

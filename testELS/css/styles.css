@@ -1,0 +1,14 @@
+.cocode {
+	font-size: 0.8em;
+    white-space: pre-wrap;
+    border: 1px solid #ccc;
+    box-shadow: inset 0px 0px 2px #ccc;
+    padding: 3px;
+}
+
+#previous-results,
+#previous-results-label,
+#previous-results-duration
+{
+    display: none;
+}

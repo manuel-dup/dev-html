@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>ELS Test app</title>
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+
+        <meta name  ="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <ul id="dropdown-pages" class="dropdown-content">
+            <li><a href="/EpticaCallBackAPI.html">Eptica API LL app</a></li>
+            <li><a href="/chat.html">Eptica Chat client page</a></li>
+            <li><a href="/essm-monitor.html">ESSM monitoring app</a></li>
+            <li><a href="/experimentations.html">Experimentations</a></li>
+            <li><a href="/swagger">Swagger UI</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://ept-f34.lan.eptica.com:8080/esInt" target="_blank">ES</a></li>
+            <li><a href="http://ept-f34.lan.eptica.com:8080/essm" target="_blank">ESSM</a></li>
+            <li><a href="http://ept-f34.lan.eptica.com:8080/manager/html" target="_blank">Tomcat Manager</a></li>
+        </ul>
+        <nav style="margin-bottom: 20px;">
+            <div class="nav-wrapper teal lighten-3">
+                <a href="/index.html" class="brand-logo">EPT-F34</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/index.html">Home</a></li>
+                    <li class="active">
+                        <a href="#" class="dropdown-button"
+                           data-activates="dropdown-pages" data-beloworigin="true" data-constrainwidth="false">ELS Test app <span class="caret" style="font-size: 10px;vertical-align: bottom;">▼</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    	<div class="row">
+    		<form class="col s4">
+    			<div class="row">
+    				<div class="input-field col s6">
+    					<select id="type">
+    						<option value="suggest">Suggest</option>
+    						<option value="bas">Best And Search</option>
+    					</select>
+    					<label>Type</label>
+    				</div>
+    				<div class="input-field col s6">
+    					<select id="expansionRadius">
+    						<script>
+    						  for (var i=0; i<11; i++) {
+    						  	document.write('<option value="'+i+'"'+((i===5)? ' selected' : '')+'>'+i+'</option>');
+    						  }
+    						</script>
+    					</select>
+    					<label>Expansion Radius</label>
+    				</div>
+    				<div class="input-field col s6">
+    					<select id="strategy">
+    						<option value="bestclauses" selected>bestclauses</option>
+    						<option value="allclauses">allclauses</option>
+    					</select>
+    					<label>Strategy</label>
+    				</div>
+    				<div class="input-field col s6">
+    					<select id="locale">
+    						<option value="fr_FR" selected>fr_FR</option>
+    						<option value="en_US">en_US</option>
+    					</select>
+    					<label>Locale</label>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="input-field col s12">
+    					<textarea id="query" class="materialize-textarea">Bonjour ! Est-ce qu'il y a des spécialistes Corba en Ukraine ? Ca me garantira le transfert des messages entre les process.</textarea>
+    					<label for="textarea1">Query</label>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="input-field col s8">
+    					<a class="waves-effect waves-light btn" href="javascript:go()">GO</a>
+    				</div>
+    				<div class="col s4">
+    					<div id="searching" class="preloader-wrapper small">
+    					    <div class="spinner-layer spinner-green-only">
+    					      <div class="circle-clipper left">
+    					        <div class="circle"></div>
+    					      </div><div class="gap-patch">
+    					        <div class="circle"></div>
+    					      </div><div class="circle-clipper right">
+    					        <div class="circle"></div>
+    					      </div>
+    					    </div>
+    					  </div>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<pre id="sentquery" class="cocode"></pre>
+    			</div>
+    		</form>
+    		<div class="col s8">
+    			<div class="collection" id="results">
+    			</div>
+    			<div class="chip" id="duration" style="display:none"></div>
+                <p/>
+                <span id="previous-results-label">Previous search</span>
+                <span id="previous-results-duration"></span>
+                <div class="collection" id="previous-results">
+                </div>
+    			<pre id="received" class="cocode"></pre>
+    		</div>
+    	</div>
+        <script src="js/lib/jquery/jquery.min.js"></script>
+        <script src="js/lib/materialize/materialize.min.js"></script>
+        <script src="js/app/configuration.js"></script>
+        <script src="js/app/suggest.js"></script>
+        <script src="js/app/bestandsearch.js"></script>
+        <script src="js/app/myApp.js"></script>
+    </body>
+</html>

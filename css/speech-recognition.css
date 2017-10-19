@@ -1,0 +1,18 @@
+.about-config {
+    color: #254ec7;
+    background-color: #f2f4f9;
+}
+
+#lang {
+    font-size: 100%;
+    margin-top: 6px;
+}
+
+#output {
+    border: 1px solid #BBB;
+    padding: 3px;
+}
+
+#not-supported {
+    display: none;
+}
