@@ -8,9 +8,21 @@
     margin-top: 6px;
 }
 
+#selected-lang > .lbl {
+    margin-right: 3px;
+}
+
 #output {
     border: 1px solid #BBB;
-    padding: 3px;
+    padding: 2px 4px;
+    border-radius: 5px;
+    color: #777;
+}
+
+#output.final {
+    border-color: #5cb85c;
+    border-width: 2px;
+    color: #000;
 }
 
 #not-supported {
