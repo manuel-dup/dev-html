@@ -26,10 +26,14 @@ if (typeof synth !== "undefined") {
     synth.cancel();
 }
 
-var selectLang = function(lang, label) {
+var voiceName = function(voice) {
+    return voice.name.replace(/Google./, "");
+};
+
+var selectLang = function(voice) {
     if (recognition !== null) {
-        recognition.lang = lang;
-        $('#selected-lang > .lbl').html(label);
+        recognition.lang = voice.lang;
+        $('#selected-lang > .lbl').html('<code class="lang-label">'+voice.lang+'</code><div class="lang-name">'+voiceName(voice)+'</div>');
         $('#selected-lang').removeClass("btn-default").addClass("btn-success");
         $('#stop').attr('disabled', 'true');
         $('#start').removeAttr('disabled');
@@ -41,13 +45,17 @@ var populateLangList = function() {
     for (var l of k) {
         if (voices.hasOwnProperty(l)) {
             var v = voices[l];
-            var name = v.name.replace(/Google./, "");
-            $('#lang-list').append('<li><a class="select-language" locale="'+v.lang+'" href="#"><code class="lang-label">'+v.lang+'</code><div class="lang-name">'+name+'</div></a></li>');
+            $('#lang-list').append('<li>\
+                <a class="select-language" locale="'+v.lang+'" href="#">\
+                    <code class="lang-label">'+v.lang+'</code>\
+                    <div class="lang-name">'+voiceName(v)+'</div>\
+                </a>\
+            </li>');
         }
     }
-
+    console.log(voices);
     $('.select-language').click(function() {
-        selectLang($(this).attr("locale"), $(this).children(".lang-name").text());
+        selectLang(voices[$(this).attr("locale")]);
     });
 }
 

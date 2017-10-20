@@ -1,6 +1,6 @@
 .lang-label {
     color: #254ec7;
-    background-color: #f2f4f9;
+    background-color: rgba(242, 244, 249, 0.5);
     margin-right: 3px;
 }
 
@@ -34,9 +34,10 @@
 #selected-lang > .lbl,
 .lang-name {
     display: inline-block;
+    vertical-align: bottom;
 }
 
-#selected-lang > .lbl::first-letter,
+#selected-lang > .lbl > .lang-name::first-letter,
 .lang-name::first-letter {
     text-transform: uppercase;
 }
