@@ -30,3 +30,13 @@
 #not-supported, #no-voices {
     display: none;
 }
+
+#selected-lang > .lbl,
+.lang-name {
+    display: inline-block;
+}
+
+#selected-lang > .lbl::first-letter,
+.lang-name::first-letter {
+    text-transform: uppercase;
+}

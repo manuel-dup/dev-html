@@ -1,7 +1,7 @@
 // ------------ for speech-recognition.html ------------
 
 var SpeechRecognition = typeof SpeechRecognition !== "undefined" ? SpeechRecognition : typeof webkitSpeechRecognition !== "undefined" ? webkitSpeechRecognition : null;
-$('#start,#stop').attr('disabled', 'true');
+$('#start,#stop,#read').attr('disabled', 'true');
 
 var voices = {};
 var noVoices = function() {
@@ -14,24 +14,54 @@ var speak = function(text, lang) {
     if (t.length > 0) {
         var utterance = new SpeechSynthesisUtterance(t);
         utterance.lang = lang;
+        synth.cancel();
         synth.speak(utterance);
     }
 }
 
+var recognition = null;
 var synth = window.speechSynthesis;
 
 if (typeof synth !== "undefined") {
     synth.cancel();
 }
 
+var selectLang = function(lang, label) {
+    if (recognition !== null) {
+        recognition.lang = lang;
+        $('#selected-lang > .lbl').html(label);
+        $('#selected-lang').removeClass("btn-default").addClass("btn-success");
+        $('#stop').attr('disabled', 'true');
+        $('#start').removeAttr('disabled');
+    }
+};
+
+var populateLangList = function() {
+    var k = Object.keys(voices).sort();
+    for (var l of k) {
+        if (voices.hasOwnProperty(l)) {
+            var v = voices[l];
+            var name = v.name.replace(/Google./, "");
+            $('#lang-list').append('<li><a class="select-language" locale="'+v.lang+'" href="#"><code class="lang-label">'+v.lang+'</code><div class="lang-name">'+name+'</div></a></li>');
+        }
+    }
+
+    $('.select-language').click(function() {
+        selectLang($(this).attr("locale"), $(this).children(".lang-name").text());
+    });
+}
+
 synth.onvoiceschanged = function() {
     var synthVoices = synth.getVoices();
     if (synthVoices.length > 0) {
+        $('#lang-list').empty();
         for (var v of synthVoices) {
-            voices[v.lang] = v;
+            if (!voices[v.lang]) {
+                voices[v.lang] = v;
+            }
         }
         $('#no-voices').hide();
-        $('#read').removeAttr('disabled');
+        populateLangList();
     } else {
         noVoices();
     }
@@ -43,13 +73,13 @@ if (synth.getVoices().length <= 0) {
 
 if (SpeechRecognition === null) {
     $('#not-supported').show();
-    $('#output').text("Exemple pour tester la synthèse vocale. Est-ce que ça marche ?");
     $('#read').click(function() {
+        $('#output').text("Exemple pour tester la synthèse vocale. Est-ce que ça marche ?");
         speak($('#output').text(), 'fr-FR');
     });
 
 } else {
-    var recognition = new SpeechRecognition();
+    recognition = new SpeechRecognition();
     recognition.lang = 'fr-FR';
     recognition.interimResults = true;
 
@@ -68,22 +98,6 @@ if (SpeechRecognition === null) {
 
     $('#read').click(function() {
         speak($('#output').text(), recognition.lang);
-    });
-
-    var selectLang = function(lang, label) {
-        recognition.lang = lang;
-        $('#selected-lang > .lbl').text(label);
-        $('#selected-lang').removeClass("btn-default").addClass("btn-success");
-        $('#stop').attr('disabled', 'true');
-        $('#start').removeAttr('disabled');
-    };
-
-    $('#select-french').click(function() {
-        selectLang('fr-FR', this.text);
-    });
-
-    $('#select-english').click(function() {
-        selectLang('en-GB', this.text);
     });
 
     var stopRecognition = function() {

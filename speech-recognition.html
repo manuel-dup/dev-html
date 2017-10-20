@@ -58,19 +58,16 @@
                         <div class="btn-group">
                             <button type="button" id="selected-lang" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false" aria-describedby="language-addon">
-                                <span class="lbl">Choose...</span>
+                                <div class="lbl">Choose...</div>
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li><a id="select-french">French</a></li>
-                                <li><a id="select-english">English</a></li>
-                            </ul>
+                            <ul id="lang-list" class="dropdown-menu"></ul>
                         </div>
                         <button class="btn btn-primary" id="start">Start</button>
                         <button class="btn btn-primary" id="stop" disabled>Stop</button>
                     </div>
                     <div class="form-group">
-                        <div id="output">Exemple pour tester la synthèse vocale. Est-ce que ça marche ?</div>
+                        <div id="output"></div>
                     </div>
                     <button class="btn btn-primary" id="read">Read</button>
                 </div>
@@ -79,7 +76,8 @@
                 <div class="panel-heading">Notes</div>
                 <div class="panel-body">
                     <ul>
-                        <li>Works only on Chrome</li>
+                        <li>Speech synthesis (the browser reads a text): works on Chrome and Firefox only</li>
+                        <li>Speech recognition (the browser captures voice from audio input): works only on Chrome</li>
                     </ul>
                 </div>
             </div>
