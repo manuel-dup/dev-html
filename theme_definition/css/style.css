@@ -1,0 +1,150 @@
+.intro {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 35%;
+	max-height: 100%;
+	padding: 0 10px;
+	border-left: 5px solid #eee;
+	border-bottom: 5px solid #eee;
+	overflow: auto;
+}
+
+.intro p {
+	font-size: 16px;
+	margin: 10px 0 0;
+}
+
+.alert-warning {
+ 	border-left-color: #f0ad4e;
+	border-width: 1px 1px 1px 5px;
+ 	padding: 10px;
+	color: #FF7C03;
+}
+
+.secret {
+	color: transparent;
+}
+
+.secret:hover {
+	color: inherit;
+}
+
+.h3 {
+	margin-bottom: 10px;
+}
+
+.main-container {
+	margin: 5px 0px 0px 5px;
+	width: 50%;
+}
+
+.controls  {
+	margin-top: 4px;
+	z-index: 10;
+}
+
+.affix {
+	box-shadow: 3px 3px 6px #777;
+	top: 0px;
+}
+
+.controls.affix .btn {
+	border-radius: 0;
+}
+
+#readable-output:before {
+	content: "Output (for ES users)";
+	color: #70b8ff;
+    font-weight: 700;
+    margin: 0px 5px;
+	padding-left: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+	display: block;
+	border-bottom: 1px solid #70b8ff;
+}
+
+#readable-output {
+	background-color: #d9edf7;
+	border: 1px solid #70b8ff;
+	border-radius: 5px;
+	z-index: 10;
+}
+
+#readable-output.affix {
+	margin-top: 4px;
+	left: calc(50% + 9px);
+}
+
+#readable-output div {
+	padding: 6px;
+}
+
+#result {
+	background-color: #ddd;
+	border: 1px solid #999;
+	border-radius: 5px;
+	min-height: 50px;
+	display: inline-block;
+	width: 100%;
+}
+
+#result:before {
+	content: "JSON Result (for developers)";
+	color: #999;
+    font-weight: 700;
+    margin: 0px 5px;
+	padding-left: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+	display: block;
+	border-bottom: 1px solid #999;
+}
+
+.sql-operator {
+	font-style: italic;
+	color: #777;
+}
+
+.descriptor-value {
+	font-weight: bold;
+}
+
+.btn-default:active, .btn-default:focus {
+	outline: none;
+}
+
+.btn-default:focus:hover {
+	background-color: #e6e6e6;
+}
+
+.btn-default:focus {
+	background-color: #fff;
+}
+
+.ontheright, .ontheleft {
+	width: 50%;
+	height: 100%;
+	border-radius: 0;
+	padding-left: 6px;
+}
+
+.ontheleft {
+	border-right: 1px solid #999;
+	float: left;
+}
+
+.ontheright {
+	float: right;
+}
+
+.tooltip-inner {
+	max-width: 100%;
+}
+
+pre {
+	background-color: inherit;
+	border: none;
+    padding: 0;
+}
