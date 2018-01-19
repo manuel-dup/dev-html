@@ -258,6 +258,10 @@ textarea#data {
     height: calc(100% - 26px);
 }
 
+#apillclient-content .CodeMirror-lines {
+    padding: 0;
+}
+
 .CodeMirror-activeline-background {
     background-color: #dae4ff;
 }
@@ -350,4 +354,18 @@ textarea#data {
     display: inline-block;
     margin: 4px 15px 0px 15px;
     padding: 10px 15px;
+}
+
+.vergic-customer-page .pagecat {
+    font-weight: bold;
+}
+
+.vergic-customer-page a.homepagelink {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.vergic-customer-page a.pagelink {
+    display: block;
+    margin-left: 25px;
 }

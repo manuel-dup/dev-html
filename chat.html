@@ -31,6 +31,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eptica Chat client page <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="/EpticaCallBackAPI.html">Eptica API LL app</a></li>
+                    <li><a href="/mduvgc/index.html">Vergic test page</a></li>
                     <li><a href="/testELS">ELS test app</a></li>
                     <li><a href="/essm-monitor.html">ESSM monitoring app</a></li>
                     <li><a href="/experimentations.html">Experimentations</a></li>
@@ -148,10 +149,14 @@
             });
         </script>
         <!--<script id="vvcActivationCode" src="//www.vivocha.com/a/epticadev01/api/vivocha.js"></script>-->
-        <script id="vvcActivationCode" src="//www.vivocha.com/a/n1_eptica01/api/vivocha.js"></script>
-        <script>
-            var vvcInstance = $("#vvcActivationCode").attr("src").match(/.*\/a\/(.*)\/api\.*/)[1];
-            $("#vvcInstanceUrl").text(vvcInstance).attr("href", `http://www.vivocha.com/a/${vvcInstance}/login/`);
+        <!--<script id="vvcActivationCode" src="//www.vivocha.com/a/n1_eptica01/api/vivocha.js"></script>-->
+        <script id="vvcActivationCode" src="https://www.vivocha.com/a/eptica_v6/api/vivocha.js"></script>
+
+        <script type="text/javascript">
+            (function(){
+                var vvcInstance = $("#vvcActivationCode").attr("src").match(/.*\/a\/(.*)\/api\.*/)[1];
+                $("#vvcInstanceUrl").text(vvcInstance).attr("href", `http://www.vivocha.com/a/${vvcInstance}/login/`);
+            })();
         </script>
     </body>
 </html>
