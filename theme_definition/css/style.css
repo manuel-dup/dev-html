@@ -1,13 +1,22 @@
+select {
+    color: black;
+    background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    border-radius: 3px;
+}
+
 .intro {
-	position: fixed;
-	top: 0px;
-	right: 0px;
-	width: 35%;
-	max-height: 100%;
-	padding: 0 10px;
-	border-left: 5px solid #eee;
-	border-bottom: 5px solid #eee;
-	overflow: auto;
+    position: relative;
+    float: right;
+    top: -20px;
+    width: 35%;
+    max-height: 100%;
+    padding: 0 10px;
+    border-left: 5px solid #eee;
+    border-bottom: 5px solid #eee;
+    overflow: auto;
 }
 
 .intro p {
@@ -20,14 +29,6 @@
 	border-width: 1px 1px 1px 5px;
  	padding: 10px;
 	color: #FF7C03;
-}
-
-.secret {
-	color: transparent;
-}
-
-.secret:hover {
-	color: inherit;
 }
 
 .h3 {
