@@ -27,6 +27,11 @@ a[target="_blank"]::after {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.page-title.no-shadow {
+    text-shadow: none;
+    color: rgba(51, 122, 183, 1);
+}
+
 /* Don't show shadows when selecting text */
 ::-moz-selection { background: #337ab7; color: #fff; text-shadow: 1px 1px 1px #000; }
 ::selection { background: #337ab7; color: #fff; text-shadow: 1px 1px 1px #000; }
@@ -368,4 +373,22 @@ textarea#data {
 .vergic-customer-page a.pagelink {
     display: block;
     margin-left: 25px;
+}
+
+
+/* Security experimentations pages */
+
+#framed-frame {
+    width: 400px;
+    height: 300px;
+    border: 1px solid #777;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+#js-sandbox {
+    border: 1px solid #777;
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+    width: 30%;
+    height: 300px;
+    overflow: auto;
 }

