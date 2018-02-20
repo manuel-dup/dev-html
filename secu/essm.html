@@ -44,6 +44,7 @@
                     <li><a href="/speech-recognition.html">Web Speech API</a></li>
                     <li><a href="/theme_definition/">Theme definition prototype</a></li>
                     <li><a href="/secu/">Security experimentations</a></li>
+                    <li><a href="/essm_seamconn.html">ESSM Seamless Connection</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="http://ept-f34.lan.eptica.com:8080/esInt" target="_blank">ES</a></li>
                     <li><a href="http://ept-f34.lan.eptica.com:8080/essm" target="_blank">ESSM</a></li>
@@ -58,25 +59,25 @@
         <div class="container-fluid">
             <h3>ESSM security test page</h3>
 
-            <div class="col-md-6 col-lg-3">
-                <a href="http://localhost:8080/essm/">http://localhost:8080/essm/</a>
-                <p>Frame options = forbidden everywhere [default]</p>
-                <iframe id="framed-frame" src="http://localhost:8080/essm/" width="400" height="300"></iframe>
+            <div class="col-md-6 col-lg-6">
+                <a href="http://ept-f34.lan.eptica.com:8080/essm/">http://ept-f34.lan.eptica.com:8080/essm/</a>
+                <span>=&gt; Frame forbidden everywhere [default]</span>
+                <iframe id="framed-frame" src="http://ept-f34.lan.eptica.com:8080/essm/en-us/" width="380" height="300"></iframe>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <a href="http://localhost:8080/essm/cool/">http://localhost:8080/essm/cool/</a>
-                <p>Frame options = allowed same origin</p>
-                <iframe id="framed-frame" src="http://localhost:8080/essm/cool/" width="400" height="300"></iframe>
+            <div class="col-md-6 col-lg-6">
+                <a href="http://ept-f34.lan.eptica.com:8080/essm/cool/">http://ept-f34.lan.eptica.com:8080/essm/cool/</a>
+                <span>=&gt; Frame allowed same origin</span>
+                <iframe id="framed-frame" src="http://ept-f34.lan.eptica.com:8080/essm/cool/en-us/" width="380" height="300"></iframe>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <a href="http://localhost:8080/essm/nofields/">http://localhost:8080/essm/nofields/</a>
-                <p>Frame options = allowed everywhere</p>
-                <iframe id="framed-frame" src="http://localhost:8080/essm/nofields/" width="400" height="300"></iframe>
+            <div class="col-md-6 col-lg-6">
+                <a href="http://ept-f34.lan.eptica.com:8080/essm/nofields/">http://ept-f34.lan.eptica.com:8080/essm/nofields/</a>
+                <span>=&gt; Frame allowed everywhere</span>
+                <iframe id="framed-frame" src="http://ept-f34.lan.eptica.com:8080/essm/nofields/en-us/" width="380" height="300"></iframe>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <a href="http://localhost:8080/essm/modern/">http://localhost:8080/essm/modern/</a>
-                <p>Frame options = allowed origin http://localhost</p>
-                <iframe id="framed-frame" src="http://localhost:8080/essm/modern/" width="400" height="300"></iframe>
+            <div class="col-md-6 col-lg-6">
+                <a href="http://ept-f34.lan.eptica.com:8080/essm/modern/">http://ept-f34.lan.eptica.com:8080/essm/modern/</a>
+                <span>=&gt; Frame allowed origin: http://ept-f34.lan.eptica.com</span>
+                <iframe id="framed-frame" src="http://ept-f34.lan.eptica.com:8080/essm/modern/en-us/" width="380" height="300"></iframe>
             </div>
         </div>
 

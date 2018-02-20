@@ -5,23 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="icon" href="/favicon.ico" />
-        <title>Security experimentations @EPT-F34</title>
+        <title>ESSM Seamless Connection @EPT-F34</title>
 
         <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
         <link href="/js/codemirror/codemirror.css" type="text/css" rel="stylesheet" />
         <link href="/js/codemirror/addon/fold/foldgutter.css" type="text/css" rel="stylesheet" />
 
         <link rel="stylesheet" href="/css/style.css">
-
-        <script>
-            window.onload = function() {$('#js-sandbox').append("<li>1. Added by inline code in &lt;head&gt; by window.onload.</li>");}
-
-            setTimeout(function(){
-                var p=document.createElement('li');
-                p.textContent="2. Added by inline code in <head>.";
-                document.getElementById("js-sandbox").appendChild(p);
-            },100);
-        </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top">
@@ -42,7 +32,7 @@
               <ul class="nav navbar-nav">
                 <li><a href="/index.html">Home</a></li>
                 <li class="dropdown active">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Security experimentations <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ESSM Seamless Connection <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="/essm-monitor.html">ESSM monitoring app</a></li>
                     <li><a href="/EpticaCallBackAPI.html">Eptica API LL app</a></li>
@@ -53,7 +43,6 @@
                     <li><a href="/swagger">Swagger UI</a></li>
                     <li><a href="/speech-recognition.html">Web Speech API</a></li>
                     <li><a href="/theme_definition/">Theme definition prototype</a></li>
-                    <li><a href="/essm_seamconn.html">ESSM Seamless Connection</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="http://ept-f34.lan.eptica.com:8080/esInt" target="_blank">ES</a></li>
                     <li><a href="http://ept-f34.lan.eptica.com:8080/essm" target="_blank">ESSM</a></li>
@@ -66,41 +55,61 @@
         </nav>
 
         <div class="container-fluid">
-            <a href="./essm.html">ESSM test page</a>
+            <div class="col-sm-8 col-md-6 col-xl-4" id="essm-seamconn">
+                <div class="form-group">
+                    <label for="essm-url">ESSM URL</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="essm-url-addon">...</span>
+                        <input type="text" class="form-control" id="essm-url" name="essm-url">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="data-gen-url">SCData Generator URL</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="data-gen-url" name="data-gen-url" value="http://localhost">
+                        <span class="input-group-addon" id="essm-url-addon">:19703/encrypt</span>
+                    </div>
+                </div>
+                <div class="form-group seamconn-buttons">
+                    <button type="button" id="prepare-seamless-connection" class="btn btn-default">Prepare</button>
+                    <form action="#" method="post" target="_blank" id="seamconn-form">
+                        <input type="hidden" name="SCDATA" id="scdata-input">
+                        <button type="submit" id="seamless-connection" class="btn btn-primary">Seamless connection to ESSM</button>
+                    </form>
+                </div>
 
-            <h3 class="page-title no-shadow"><code>Content-Security-Policy: script-src</code> header</h3>
-            <ol id="js-sandbox"></ol>
-
-            <button type="button" class="btn btn-default" onclick="addMessage()">Add #1</button>
-            <button type="button" class="btn btn-default" onclick="$('#js-sandbox').append('<li>12. Added by click on button #2.</li>')">Add #2</button>
-            <button type="button" class="btn btn-default" id="add-button-3">Add #3</button>
-            <a href="javascript:$('#js-sandbox').append('<li>14. Added by click on link with \'javascript:\' code.</li>');void(0);">Link #1</a>
-
-            <h3 class="page-title no-shadow"><code>X-Frame-Options</code> header</h3>
-
-            <div class="col-sm-6">
-                <p>This is a frame embedding <a href="./framed.html">framed.html</a> (relative to current page, i.e. same origin):</p>
-                <iframe id="framed-frame" src="./framed.html" width="400" height="300"></iframe>
-            </div>
-            <div class="col-sm-6">
-                <p>This is a frame embedding <a href="http://ept-f34/secu/framed.html">framed.html</a> from 'ept-f34':</p>
-                <iframe id="framed-frame" src="http://ept-f34/secu/framed.html" width="400" height="300"></iframe>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">JSON Payload</span>
+                    </div>
+                    <div class="panel-body">
+                        <textarea spellcheck="false" class="form-control" id="essm-seamconn-payload">{
+  "customer": {
+    "EMail": "manuel@localhost",
+    "SelfPass": "manu"
+  },
+  "createCustomerWhen": "now"
+}</textarea>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">Encrypted SCData</span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="encrypted-scdata"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <script src="/js/jquery/jquery-1.11.3.min.js"></script>
         <script src="/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-        <script src="./secu.js"></script>
-        <script src="http://localhost/secu/secu2.js"></script>
-        <script src="http://ept-f34/secu/secu3.js"></script>
-        <script src="http://ept-f34.lan.eptica.com/secu/secu4.js"></script>
+        <script src="/js/codemirror/codemirror.js" type="text/javascript"></script>
+        <script src="/js/codemirror/mode/javascript/javascript.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/edit/matchbrackets.js" type="text/javascript"></script>
+        <script src="/js/codemirror/addon/selection/active-line.js" type="text/javascript"></script>
 
-        <script>
-            $('#js-sandbox').append("<li>3. Added by inline code in &lt;body&gt;.</li>");
-        </script>
-
-        <script src="data:text/javascript;,var p=document.createElement('li');p.textContent='9. Added by script in data URI.';document.getElementById('js-sandbox').appendChild(p);"></script>
-
-        <script src="data:text/javascript;base64,dmFyIHA9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnbGknKTtwLnRleHRDb250ZW50PScxMC4gQWRkZWQgYnkgc2NyaXB0IGluIGRhdGEgVVJJIGluIGJhc2U2NC4nO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdqcy1zYW5kYm94JykuYXBwZW5kQ2hpbGQocCk7"></script>
+        <script src="/js/essm_seamconn.js" type="text/javascript"></script>
     </body>
 </html>
