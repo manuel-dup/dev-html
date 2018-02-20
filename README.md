@@ -13,3 +13,6 @@ This project contains the following pages:
 1. Experimentations: used to try things in HTML, CSS and/or Javascript
 1. Swagger UI: branded with Eptica colors and logo. Also has a predefined list of APIs entrypoints (some of Snowball APIs)
 1. Web Speech API: experimentations around the Web Speech API
+1. ESSM Seamless Connection: Form to test new SelfService Seamless Connection using SCData encrypted parameter
+
+
