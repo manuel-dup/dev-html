@@ -64,10 +64,48 @@
 
         <div id="services-status">
             <div id="tomcat-status">
-                <div class="glyphicon glyphicon-refresh" onclick="initTomcatStatus()"></div>
                 <div class="title">Tomcat status</div>
+                <div class="glyphicon glyphicon-refresh" onclick="initTomcatStatus()"></div>
                 <div id="tomcat-status-lastupdate">...</div>
                 <table id="tomcat-apps" class="table table-bordered table-hover table-condensed"></table>
+            </div>
+            <div id="elsrch-status">
+                <div class="title">ElasticSearch status</div>
+                <div class="glyphicon glyphicon-refresh" onclick="initElsrchStatus()"></div>
+                <button id="elsrch-status-status" class="btn btn-down btn-xs">...</button>
+
+                <div class="panel-group" id="elsrch-components">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="headingIndices">
+                            <div class="panel-title">
+                                <a data-toggle="collapse" data-parent="#elsrch-components" href="#collapseIndices">
+                                    Indices (<span id="nb-elsrch-indices">...</span>)
+                                </a>
+                            </div>
+                        </div>
+                        <div id="collapseIndices" class="panel-collapse collapse">
+                            <table id="elsrch-indices" class="panel-body table table-hover table-condensed">
+                                <tbody></tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="headingPlugins">
+                            <div class="panel-title">
+                                <a data-toggle="collapse" data-parent="#elsrch-components" href="#collapsePlugins">
+                                    Plugins (<span id="nb-elsrch-plugins">...</span>)
+                                </a>
+                            </div>
+                        </div>
+                        <div id="collapsePlugins" class="panel-collapse collapse">
+                            <table id="elsrch-plugins" class="panel-body table table-hover table-condensed">
+                                <tbody></tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -155,6 +193,7 @@
         <script>
             (function() {
                 initTomcatStatus();
+                initElsrchStatus();
             })();
         </script>
     </body>

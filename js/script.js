@@ -183,6 +183,7 @@ function resetTomcatStatusTable() {
 
 function initElsrchStatus() {
     $('#elsrch-indices').hide();
+    $('#elsrch-status > .glyphicon-refresh').addClass("spinning");
 
     var failed = false;
     $.get("http://" + currentHost + ":9200/_cluster/health").done(function(response) {
@@ -209,6 +210,7 @@ function initElsrchStatus() {
 
         $('#elsrch-status-status').popover({
             content: buildElsrchProperties(nodeProcess),
+            placement: 'left',
             html: true
         });
 
@@ -268,8 +270,10 @@ function initElsrchStatus() {
                     + '<th class="text-right">'+bytesToSize(totalSize)+'</th></tr>');
 
             $('#elsrch-indices').show();
+            $('#elsrch-status > .glyphicon-refresh').removeClass("spinning");
         }).fail(function() {
             $('#nb-elsrch-indices,#nb-elsrch-plugins').text("N/A");
+            $('#elsrch-status > .glyphicon-refresh').removeClass("spinning");
         })
     });
 }
