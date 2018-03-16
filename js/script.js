@@ -49,6 +49,8 @@ function initEpticaCallBackAPI() {
 
     $('.apill-response-loading').hide();
     $('.apill-response-loading > .glyphicon').removeClass("spinning");
+
+    $('#url').val(`http://${currentHost}/esInt`)
 }
 
 function sendAPILLRequest(editor, responseContainer) {
@@ -119,6 +121,7 @@ function hideError() {
 // ------------ for index.html ------------
 function initTomcatStatus() {
     $('#tomcat-status-lastupdate').text("Updating...");
+    $('#tomcat-status > .glyphicon-refresh').addClass("spinning");
     var ignoredApps = ["manager", "", "docs", "examples", "host-manager"];
     $.ajax({
         url: "/tomcatmgr/text/list",
@@ -132,6 +135,7 @@ function initTomcatStatus() {
                 createTomcatStatusLine(`Cannot get Tomcat status: [${xhr.status}] ${xhr.statusText}`, "", true);
             }
             $('#tomcat-status-lastupdate').text("Updated: " + now());
+            $('#tomcat-status > .glyphicon-refresh').removeClass("spinning");
         },
         success: function (data) {
             resetTomcatStatusTable();
@@ -149,6 +153,7 @@ function initTomcatStatus() {
                 }
             });
             $('#tomcat-status-lastupdate').text("Updated: " + now());
+            $('#tomcat-status > .glyphicon-refresh').removeClass("spinning");
         }
     });
 }

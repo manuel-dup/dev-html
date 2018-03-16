@@ -59,7 +59,6 @@
                   </ul>
                 </li>
               </ul>
-
                 <div class="alert alert-info special-warning" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" id="close-error" title="Close" aria-hidden="true"></span>
                     <span style="font-weight:bold;">Info:</span>
@@ -77,7 +76,7 @@
                         <div class="form-group">
                             <label for="url">URL:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="url" value="http://localhost/esInt">
+                                <input type="text" class="form-control" id="url"> <!-- value="http://localhost/esInt"> -->
                                 <span class="input-group-addon" id="basic-addon2">/dispatch/api</span>
                             </div>
                         </div>
@@ -100,31 +99,38 @@
                             <label for="data">XML request:</label>
                             <textarea spellcheck="false" class="form-control" id="data" name="data" rows="30" cols="104">
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;QueryRequest&gt;
-  &lt;request&gt;
-    &lt;ticket_min&gt;40259&lt;/ticket_min&gt;
-    &lt;ticket_max&gt;40259&lt;/ticket_max&gt;
-  &lt;/request&gt;
-  &lt;options&gt;
-    &lt;max-results&gt;10&lt;/max-results&gt;
-    &lt;sortBy name=&quot;requestid&quot;&gt;false&lt;/sortBy&gt;
-    &lt;data&gt;
-      &lt;request inverted=&quot;true&quot;&gt;
-        &lt;fields/&gt;
-        &lt;requestHistory&gt;none&lt;/requestHistory&gt;
-        &lt;webboard_data&gt;
-          &lt;form_name&gt;false&lt;/form_name&gt;
-          &lt;referer_url&gt;false&lt;/referer_url&gt;
-        &lt;/webboard_data&gt;
-        &lt;email_data&gt;
-          &lt;subject&gt;false&lt;/subject&gt;
-          &lt;mailbox&gt;false&lt;/mailbox&gt;
-        &lt;/email_data&gt;
-      &lt;/request&gt;
-    &lt;/data&gt;
-  &lt;/options&gt;
-&lt;/QueryRequest&gt;
-    </textarea>
+&#x3C;QueryCustomer&#x3E;
+  &#x3C;customer&#x3E;
+    &#x3C;fields&#x3E;
+      &#x3C;field name=&#x22;EMail&#x22;&#x3E;manuel@localhost&#x3C;/field&#x3E;
+    &#x3C;/fields&#x3E;
+  &#x3C;/customer&#x3E;
+  &#x3C;options&#x3E;
+    &#x3C;data&#x3E;
+   &#x9;&#x3C;customer&#x3E;
+        &#x3C;fields&#x3E;
+          &#x3C;field&#x3E;EMail&#x3C;/field&#x3E;
+          &#x3C;field&#x3E;FirstName&#x3C;/field&#x3E;
+          &#x3C;field&#x3E;LastName&#x3C;/field&#x3E;
+          &#x3C;field&#x3E;SelfPass&#x3C;/field&#x3E;
+        &#x3C;/fields&#x3E;
+      &#x3C;/customer&#x3E;
+    &#x3C;/data&#x3E;
+  &#x3C;/options&#x3E;
+&#x3C;/QueryCustomer&#x3E;
+&#x3C;!--
+&#x3C;CreateCustomer&#x3E;
+  &#x3C;customer&#x3E;
+    &#x3C;fields&#x3E;
+         &#x3C;field name=&#x22;EMail&#x22;&#x3E;ihaveapassword@localhost&#x3C;/field&#x3E;
+         &#x3C;field name=&#x22;FirstName&#x22;&#x3E;I have&#x3C;/field&#x3E;
+         &#x3C;field name=&#x22;LastName&#x22;&#x3E;a password&#x3C;/field&#x3E;
+         &#x3C;field name=&#x22;SelfPass&#x22;&#x3E;verystrongpassword&#x3C;/field&#x3E;
+    &#x3C;/fields&#x3E;
+  &#x3C;/customer&#x3E;
+&#x3C;/CreateCustomer&#x3E;
+--&#x3E;
+</textarea>
                         </div>
                     </div>
                 </div>

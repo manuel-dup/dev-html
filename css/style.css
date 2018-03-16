@@ -101,6 +101,12 @@ a[target="_blank"]::after {
     width: 380px;
 }
 
+#services-status .title {
+    font-weight: bold;
+    font-size: 16px;
+    display: inline;
+}
+
 #tomcat-status-lastupdate,
 #elsrch-status-status {
     float: right;
