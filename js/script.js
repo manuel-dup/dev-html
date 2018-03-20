@@ -158,22 +158,82 @@ function initTomcatStatus() {
     });
 }
 
+var versionsCallbacks = {
+    esInt: getESVersion,
+    essm: getESSMVersion,
+    essm30: getESSMVersion,
+    els: getELSVersion
+}
+
+function getESVersion(url, element) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.withCredentials = true;
+
+    xmlHttp.onload = function(event) {
+        element.text(this.responseText);
+
+        var xmlHttpLogout = new XMLHttpRequest();
+        xmlHttpLogout.withCredentials = true;
+        var u = new URL(this.responseURL);
+        xmlHttpLogout.open("GET", u.origin + u.pathname + "logout?Screen=version");
+        xmlHttpLogout.send(null);
+    };
+
+    // synchronous HTTP call
+    xmlHttp.open("GET", url + "/dispatch/connection?Screen=version");
+    xmlHttp.send(null);
+}
+
+function getESSMVersion(url, element) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.withCredentials = true;
+
+    xmlHttp.onload = function(event) {
+        element.text(this.responseText.match(/.*Version: (.*)/)[1]);
+    }
+
+    xmlHttp.open("GET", url + "/admin/home.do?action=about");
+    xmlHttp.setRequestHeader("Authorization", "Basic " + window.btoa("monitor:monitor"));
+    xmlHttp.send(null);
+}
+
+function getELSVersion(url, element) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.withCredentials = true;
+
+    xmlHttp.onload = function(event) {
+        element.text(this.responseText.match(/.*Eptica Linguistic Services (.*) \(build.*/)[1]);
+    }
+
+    xmlHttp.open("GET", url + "/api/version");
+    xmlHttp.send(null);
+}
+
 function createTomcatStatusLine(name, status, error) {
     var rowClass = error ? "danger" : (status === "" ? "warning" : "success");
 
-    var url;
+    var url = `http://${currentHost}:8080/${name}`;
+
+    var versionElement = $('<span style="margin-left:10px;color:#666;"></span>');
+
+    var callback = versionsCallbacks[name];
+
+    if (callback) {
+        callback(url, versionElement);
+    }
     if (name.match(/els/)) {
-        url = `http://${currentHost}:8080/${name}/static/`;
-    } else {
-        url = `http://${currentHost}:8080/${name}`;
+        url += "/static/";
     }
 
-    var nameElement = $(rowClass === "success" && '<a href="'+url+'" target="_blank" style="font-size:14px;"></a>' || '<span style="font-size:14px;"></span>');
+    var nameElement = $(rowClass === "success" && '<a href="'+url+'" target="_blank"></a>' || '<span style="font-size:14px;"></span>');
     nameElement.text(name);
 
     var row = $('<tr></tr>')
         .addClass(rowClass)
-        .append($("<td></td>").append(`<span class="glyphicon" aria-hidden="true" title="${status}"></span>&nbsp;`).append(nameElement));
+        .append($('<td style="font-size:14px;"></td>')
+            .append(`<span class="glyphicon" aria-hidden="true" title="${status}"></span>&nbsp;`)
+            .append(nameElement)
+            .append(versionElement));
     $('#tomcat-apps').append(row);
 }
 
