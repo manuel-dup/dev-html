@@ -66,17 +66,23 @@
         </nav>
 
         <div class="container-fluid">
-            <a href="./essm.html">ESSM test page</a>
+            <div class="col-sm-12">
+                <a href="./essm.html">ESSM test page</a>
+            </div>
 
-            <h3 class="page-title no-shadow"><code>Content-Security-Policy: script-src</code> header</h3>
-            <ol id="js-sandbox"></ol>
+            <div class="col-sm-8">
+                <h3 class="page-title no-shadow"><code>Content-Security-Policy: script-src</code> header</h3>
+                <ol id="js-sandbox"></ol>
 
-            <button type="button" class="btn btn-default" onclick="addMessage()">Add #1</button>
-            <button type="button" class="btn btn-default" onclick="$('#js-sandbox').append('<li>12. Added by click on button #2.</li>')">Add #2</button>
-            <button type="button" class="btn btn-default" id="add-button-3">Add #3</button>
-            <a href="javascript:$('#js-sandbox').append('<li>14. Added by click on link with \'javascript:\' code.</li>');void(0);">Link #1</a>
+                <button type="button" class="btn btn-default" onclick="addMessage()">Add #1</button>
+                <button type="button" class="btn btn-default" onclick="$('#js-sandbox').append('<li>12. Added by click on button #2.</li>')">Add #2</button>
+                <button type="button" class="btn btn-default" id="add-button-3">Add #3</button>
+                <a href="javascript:$('#js-sandbox').append('<li>14. Added by click on link with \'javascript:\' code.</li>');void(0);">Link #1</a>
+            </div>
 
-            <h3 class="page-title no-shadow"><code>X-Frame-Options</code> header</h3>
+            <div class="col-sm-12">
+                <h3 class="page-title no-shadow"><code>X-Frame-Options</code> header</h3>
+            </div>
 
             <div class="col-sm-6">
                 <p>This is a frame embedding <a href="./framed.html">framed.html</a> (relative to current page, i.e. same origin):</p>

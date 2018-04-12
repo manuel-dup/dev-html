@@ -160,6 +160,7 @@ function initTomcatStatus() {
 
 var versionsCallbacks = {
     esInt: getESVersion,
+    es94: getESVersion,
     essm: getESSMVersion,
     essm30: getESSMVersion,
     els: getELSVersion
